@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+
+.app {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.app-item {
+  margin-top: 12px;
+}
