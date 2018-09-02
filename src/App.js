@@ -6,7 +6,7 @@ import PostFetcher from './util/PostFetcher'
 import PostSelect from './components/PostSelect/PostSelect'
 import PostList from './components/PostList/PostList'
 import { NUMBER_TO_DISPLAY_OPTIONS, UPDATE_INTERVAL_OPTIONS } from './util/Instance'
-// import UPDATE_INTERVAL_OPTIONS from './util/Instance'
+
 class App extends Component {
   constructor() {
     super()
@@ -55,11 +55,11 @@ class App extends Component {
   fetchOne () {
     const { feedUrl, start_id } = this.state
     this.fetcher.fetch(feedUrl, 1, start_id).then(posts => {
-      const last = _.last(posts)
+      const post = posts[0]
       this.setState((prevState, props) => ({
         ...this.state,
-        posts: [...prevState.posts, _.last(posts)],
-        start_id: last ? last.id : null,
+        posts: [...prevState.posts, post],
+        start_id: post ? post.id : null,
         loading: false
       }))
     })
@@ -67,7 +67,7 @@ class App extends Component {
 
   componentDidMount () {
     this.fetchPost()
-    this.interval = setInterval(this.fetchPost, this.state.updatedInterval.value)
+    this.interval = setInterval(() => this.onLoading(this.fetchPost), this.state.updatedInterval.value)
   }
 
   componentWillUnmount () {
@@ -103,7 +103,7 @@ class App extends Component {
 
   onUpdateSettings (e) {
     clearInterval(this.interval)
-    this.interval = setInterval(this.fetchPost, this.state.updatedInterval.value)
+    this.interval = setInterval(() => this.onLoading(this.fetchPost), this.state.updatedInterval.value)
     this.setState({
       ...this.state,
       feedUrl: this.state.inputValue,
