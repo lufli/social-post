@@ -1,27 +1,22 @@
-import React, { Component } from 'react'
-import { List, Avatar } from 'antd'
+import React from 'react'
+import { List, Avatar, Button } from 'antd'
 import IconText from './IconText'
 
-export default class Post extends Component {
-  constructor(props) {
-    super(props)
-  }
+const Post = ({post, onIgnorePost, loading}) => (
+  <List.Item
+    width="200px"
+    actions={[
+      <IconText type="clock-circle-o" text={post.created_at.format('DD/MM/YYYY HH:MM')} />,
+      <IconText type="heart-o" text={post.favorite_count} />,
+      <IconText type="retweet" text={post.retweet_count} />,
+      <Button size="small" type="danger" ghost={true} disabled={loading} onClick={() => onIgnorePost(post.id)}>Ignore</Button>]}
+  >
+    <List.Item.Meta
+      avatar={<Avatar src={post.avatar_url} />}
+      title={<a href={post.avatar_url}>{post.user_name}</a>}
+      description={post.text}
+    />
+  </List.Item>
+)
 
-  render () {
-    return (
-      <List.Item
-        width="200px"
-        actions={[
-          <IconText type="heart-o" text={this.props.post.favorite_count} />,
-          <IconText type="retweet" text={this.props.post.retweet_count} />,
-          <IconText type="close" />]}
-      >
-        <List.Item.Meta
-          avatar={<Avatar src={this.props.post.avatar_url} />}
-          title={<a href={this.props.post.avatar_url}>{this.props.post.user_name}</a>}
-          description={this.props.post.text}
-        />
-      </List.Item>
-    )
-  }
-}
+export default Post

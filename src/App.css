@@ -10,4 +10,11 @@
 
 .app-item {
   margin-top: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.app-item div {
+  margin-right: 12px;
 }
