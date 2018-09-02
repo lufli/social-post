@@ -13,7 +13,7 @@ const Post = ({post, onIgnorePost, loading}) => (
   >
     <List.Item.Meta
       avatar={<Avatar src={post.avatar_url} />}
-      title={<a href={post.avatar_url}>{post.user_name}</a>}
+      title={<a href={post.link} target="_blank">{post.user_name}</a>}
       description={post.text}
     />
   </List.Item>

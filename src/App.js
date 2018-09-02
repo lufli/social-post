@@ -12,7 +12,7 @@ class App extends Component {
     super()
     this.fetcher = new PostFetcher()
     this.state = {
-      inputValue: this.fetcher.url,
+      inputValue: `http://api.massrelevance.com/MassRelDemo/kindle.json`,
       posts: [],
       ignorePosts: [],
       feedUrl: `http://api.massrelevance.com/MassRelDemo/kindle.json`,
